@@ -1,0 +1,49 @@
+.ticket {
+  display: flex;
+  flex-direction: column;
+
+  background-color: #148ad1;
+}
+
+.ticket__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  padding: 5px 10px;
+
+  line-height: 18px;
+
+  color: white;
+}
+
+.ticket__logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  height: 30px;
+}
+
+.ticket__price {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.ticket__price-amount {
+  font-size: 22px;
+}
+
+.ticket__price-type {
+  font-size: 12px;
+}
+
+.ticket__button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f4a252;
+  color: white;
+  text-align: center;
+}

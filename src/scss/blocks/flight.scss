@@ -1,0 +1,84 @@
+.flight {
+  padding: 0 10px;
+
+  background-color: white;
+  border-radius: 6px;
+
+  &:not(:last-child){
+    margin-bottom: 2px;
+  }
+}
+
+.flight__locations {
+  display: flex;
+  align-content: center;
+}
+
+.flight__departure {
+  display: flex;
+}
+
+.flight__icon {
+  transform: rotateY(180deg);
+  margin: 0 10px;
+}
+
+.flight__segment {
+  display: flex;
+  align-content: center;
+
+  margin: 0;
+  padding: 7px 0;
+
+  &--locations {
+    border-bottom: 1px solid #80808052;
+  }
+
+  &--time {
+    justify-content: space-between;
+
+  }
+
+  &--transfers {
+    justify-content: center;
+    position: relative;
+    padding: 0;
+
+    color: #f48452;
+
+    &::before, &::after {
+      content: "";
+      width: 34%;
+      height: 1.4px;
+      background-color: #8080809e;
+      position: absolute;
+      top: 50%;
+    }
+
+    &::before {
+      left: 5%;
+    }
+
+    &::after {
+      right: 5%;
+    }
+  }
+
+  &--airline {
+    font-size: 16px;
+  }
+}
+
+.flight__time {
+  font-size: 22px;
+}
+
+.flight__day, .flight__airport-uid {
+  font-size: 18px;
+  color: #148ad1;
+}
+
+.flight__duration {
+  display: flex;
+  align-items: center;
+}

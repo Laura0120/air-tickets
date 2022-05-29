@@ -1,0 +1,75 @@
+.control-bar {
+  position: sticky;
+  top: 20px;
+  float: left;
+
+  display: flex;
+  height: min-content;
+  flex-direction: column;
+  flex-basis: 25%;
+
+  padding-top: 20px;
+
+  font-size: 12px;
+}
+
+.control-bar__sort {
+  margin-bottom: 30px;
+}
+
+.control-bar__filter {
+  margin: 0 0 15px;
+  padding: 0;
+
+  border: none;
+}
+
+.control-bar__title {
+  margin: 0 0 15px;
+
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.control-bar__input-wrapper {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+
+}
+
+.control-bar__input-price {
+  width: 100%;
+  font-size: 12px;
+}
+
+.control-bar__label {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+  max-height: 24px;
+
+  cursor: pointer;
+
+  &--price {
+    margin-right: 5px;
+    width: fit-content;
+
+  }
+}
+
+.control-bar__airline-name {
+  display: -webkit-box;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: (1);
+}
+
+.control-bar__min-price-footnote {
+  min-width: 70px;
+  margin-left: 5px;
+}
