@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ait-tickets/static/css/main.770ecb89.css",
+    "main.js": "/ait-tickets/static/js/main.52b4e8bf.js",
+    "static/js/787.214cfc3e.chunk.js": "/ait-tickets/static/js/787.214cfc3e.chunk.js",
+    "index.html": "/ait-tickets/index.html",
+    "main.770ecb89.css.map": "/ait-tickets/static/css/main.770ecb89.css.map",
+    "main.52b4e8bf.js.map": "/ait-tickets/static/js/main.52b4e8bf.js.map",
+    "787.214cfc3e.chunk.js.map": "/ait-tickets/static/js/787.214cfc3e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.770ecb89.css",
+    "static/js/main.52b4e8bf.js"
+  ]
+}
