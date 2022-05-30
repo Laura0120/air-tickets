@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ait-tickets/static/css/main.7da3a810.css",
-    "main.js": "/ait-tickets/static/js/main.2aee4ed4.js",
-    "static/js/787.214cfc3e.chunk.js": "/ait-tickets/static/js/787.214cfc3e.chunk.js",
-    "index.html": "/ait-tickets/index.html",
-    "main.7da3a810.css.map": "/ait-tickets/static/css/main.7da3a810.css.map",
-    "main.2aee4ed4.js.map": "/ait-tickets/static/js/main.2aee4ed4.js.map",
-    "787.214cfc3e.chunk.js.map": "/ait-tickets/static/js/787.214cfc3e.chunk.js.map"
+    "main.css": "/ait-tickets/build/static/css/main.7da3a810.css",
+    "main.js": "/ait-tickets/build/static/js/main.51ddeb5b.js",
+    "static/js/787.214cfc3e.chunk.js": "/ait-tickets/build/static/js/787.214cfc3e.chunk.js",
+    "index.html": "/ait-tickets/build/index.html",
+    "main.7da3a810.css.map": "/ait-tickets/build/static/css/main.7da3a810.css.map",
+    "main.51ddeb5b.js.map": "/ait-tickets/build/static/js/main.51ddeb5b.js.map",
+    "787.214cfc3e.chunk.js.map": "/ait-tickets/build/static/js/787.214cfc3e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7da3a810.css",
-    "static/js/main.2aee4ed4.js"
+    "static/js/main.51ddeb5b.js"
   ]
 }
