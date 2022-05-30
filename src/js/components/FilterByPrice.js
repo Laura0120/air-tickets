@@ -60,10 +60,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangeMinPrice(evt) {
-      dispatch(ActionCreator.changeMinPrice(evt.currentTarget.value));
+    Math.sign(evt.currentTarget.value) !== -1 &&
+    dispatch(ActionCreator.changeMinPrice(evt.currentTarget.value));
     },
   onChangeMaxPrice(evt) {
-      dispatch(ActionCreator.changeMaxPrice(evt.currentTarget.value));
+    Math.sign(evt.currentTarget.value) !== -1 &&
+    dispatch(ActionCreator.changeMaxPrice(evt.currentTarget.value));
     },
 });
 

@@ -59,8 +59,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onChangeSegments(evt, change) {
       change ?
-      dispatch(ActionCreator.removeSegmentFromFilter(Number(evt.target.value))):
-      dispatch(ActionCreator.addSegmentToFilter(Number(evt.target.value)));
+      dispatch(ActionCreator.removeSegmentFromFilter(Number(evt.currentTarget.value))):
+      dispatch(ActionCreator.addSegmentToFilter(Number(evt.currentTarget.value)));
     },
   fetchActiveFiltersByAirlines(selectedSegments){
     dispatch(fetchActiveFiltersByAirlines(selectedSegments))
