@@ -2,7 +2,7 @@
   "name": "air-tickets",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Laura0120.github.io/ait-tickets",
+  "homepage": "https://Laura0120.github.io/air-tickets",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",

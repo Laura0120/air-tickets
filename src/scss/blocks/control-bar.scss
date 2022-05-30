@@ -37,6 +37,15 @@
 
   width: 100%;
 
+  transition: color 0.3s ease, opacity 0.3s ease;
+
+  &:hover {
+    color:  #148ad1;
+  }
+
+  &:active {
+    opacity: 0.7;
+  }
 }
 
 .control-bar__input-price {
@@ -70,6 +79,6 @@
 }
 
 .control-bar__min-price-footnote {
-  min-width: 70px;
-  margin-left: 5px;
+  min-width: 65px;
+  text-align: right;
 }

@@ -46,4 +46,16 @@
   background-color: #f4a252;
   color: white;
   text-align: center;
+
+
+  transition: background 0.3s ease,
+  opacity 0.3s ease;
+
+  &:hover {
+    background-color: #f48452;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
 }

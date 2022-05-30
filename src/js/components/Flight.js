@@ -32,7 +32,7 @@ function Flight(props) {
               src={`${baseUrl}/img/icon-arrow.svg`}
               width={"20"}
               height={"5"}
-              alt="Стрелка направления"/>
+              alt="иконка  - стрелка вперед"/>
           <span>
           {arrivalCity ? `${arrivalCity.caption}, ${arrivalAirport.caption}` :  arrivalAirport.caption}
           <span className={"flight__airport-uid"}>{` (${arrivalAirport.uid})`}</span>
@@ -48,7 +48,7 @@ function Flight(props) {
                 src={`${baseUrl}/img/icon-clock-display.svg`}
                 width={"15"}
                 height={"15"}
-                alt="Стрелка направления"/>
+                alt="иконка - циферблат часов"/>
             {getHoursAndMinutes(duration)}
         </span>
         <span className={"flight__time"}>

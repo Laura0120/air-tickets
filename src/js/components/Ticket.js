@@ -10,6 +10,7 @@ function Ticket(props) {
   const {carrier, price, legs} = flight
   return (
     <article className={"ticket"}>
+      <h3 className={"visually-hidden"}>Билет от перевозчика: {carrier.caption}</h3>
       <div className={"ticket__header"}>
         <div className={"ticket__logo"}>
           <img src={`${baseUrl}/img/airline-logos/${carrier.uid}.svg`}

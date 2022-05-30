@@ -23,6 +23,7 @@ root.render(
         <App />
     </Provider>
 );
+
 store.dispatch(fetchSortedFlights(SORT_TYPE.ASCENDING_PRICE.value));
 store.dispatch(fetchIsShowMore(COUNT_FLIGHTS_PER_STEP));
 store.dispatch(fetchInitialFilters())
