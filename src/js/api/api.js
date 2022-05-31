@@ -11,30 +11,24 @@ import {
 export const initialFilters = collectInitialFilters(aLLFlights);
 export  let validFlights  = [...aLLFlights];
 
-export const getNextFlights = (currentAmount) => {
-  return Promise.resolve(validFlights.slice(currentAmount, currentAmount + COUNT_FLIGHTS_PER_STEP));
+export const getNextFlights = ({currentCount, limit}) => {
+  return Promise.resolve(validFlights.slice(currentCount, currentCount + limit));
 }
 
-export const getIsShowMore = (renderedFlightsCount) => {
-  return Promise.resolve(validFlights.length >  renderedFlightsCount);
+export const getIsShowMore = ({currentCount, limit}) => {
+  return Promise.resolve(validFlights.length >  (currentCount + limit));
 }
 
 export const getInitialFilters = () => {
   return Promise.resolve(initialFilters);
 }
 
-export const getActiveFiltersByAirlines = (selectedSegments) => {
-  if (!selectedSegments || selectedSegments.length === 0 ) {
-    return Promise.resolve(initialFilters.airlines.map(item => item.uid));
-  }
-  return Promise.resolve(collectActiveFiltersByAirlines(selectedSegments));
+export const getActiveFiltersByAirlines = (params) => {
+  return Promise.resolve(collectActiveFiltersByAirlines(params));
 }
 
-export const getActiveFiltersBySegments = (selectedAirlines) => {
-  if (!selectedAirlines || selectedAirlines.length === 0 ) {
-    return Promise.resolve(initialFilters.segments);
-  }
-  return Promise.resolve(collectActiveFiltersBySegments(selectedAirlines));
+export const getActiveFiltersBySegments = (params) => {
+  return Promise.resolve(collectActiveFiltersBySegments(params));
 }
 
 export const getActivePrice = () => {
@@ -42,7 +36,7 @@ export const getActivePrice = () => {
   return Promise.resolve(activePrice);
 }
 
-export const getFilteredFlights = ({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}) => {
-  validFlights = filterFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort})
+export const getFilteredFlights = (params) => {
+  validFlights = filterFlights(params)
   return Promise.resolve(validFlights.slice(0, COUNT_FLIGHTS_PER_STEP));
 }

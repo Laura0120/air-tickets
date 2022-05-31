@@ -2,23 +2,18 @@ import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {ActionCreator} from '../store/action'
 import {adaptFilterLabelBySegments} from '../utils'
-import {fetchActiveFiltersByAirlines} from '../store/api-actions'
 
 function FilterBySegments(props) {
   const {initialFilter,
     activeSegments,
     selectedSegments,
-    selectedAirlines,
     onChangeSegments,
-    selectedMinPrice,
-    selectedMaxPrice,
   } = props
 
   return (
     <fieldset className={"control-bar__filter"}>
       <legend className={"visually-hidden"}>Количество пересадок</legend>
       {initialFilter.map((item) => {
-         const isDisabled = (selectedAirlines.length > 0 || selectedMinPrice || selectedMaxPrice)  && !activeSegments.includes(item)
          return (
             <div key={item}
                  className={"control-bar__input-wrapper"}
@@ -27,7 +22,7 @@ function FilterBySegments(props) {
                      name={'segmentsCount'}
                      value={item}
                      id={`segmentsCount-${item}`}
-                     disabled={isDisabled}
+                     disabled={!activeSegments.includes(item)}
                      checked={selectedSegments.includes(item)}
                      onChange={(evt) => {
                        onChangeSegments(evt, selectedSegments.includes(item))
@@ -50,7 +45,6 @@ const mapStateToProps = (state) => ({
     initialFilter: state.DATA.initialFilters.segments,
     activeSegments: state.DATA.activeSegments,
     selectedSegments: state.APP_STATE.selectedSegments,
-    selectedAirlines: state.APP_STATE.selectedAirlines,
 });
 
 const mapDispatchToProps = (dispatch) => ({

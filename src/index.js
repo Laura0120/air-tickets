@@ -8,7 +8,6 @@ import './scss/style.scss';
 import App from './js/components/App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer from './js/store/reducers/root-reducer';
-import {fetchInitialFilters} from './js/store/api-actions';
 
 const store = createStore(
     rootReducer,
@@ -22,8 +21,5 @@ root.render(
         <App />
     </Provider>
 );
-
-store.dispatch(fetchInitialFilters())
-
 
 reportWebVitals();

@@ -1,11 +1,10 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {connect} from "react-redux";
 import {ActionCreator} from '../store/action'
 
 function FilterByAirline(props) {
   const {initialFilter,
     activeAirlines,
-    selectedSegments,
     selectedAirlines,
     onChangeAirline,
   } = props
@@ -15,7 +14,7 @@ function FilterByAirline(props) {
       <legend className={"control-bar__title"}>Авиокомпании</legend>
       {initialFilter.map(({uid, caption, minPrice}) => {
         const indexActiveAirline = activeAirlines.findIndex((item) => item.uid === uid)
-        const isDisabled = selectedSegments.length !== 0 && indexActiveAirline === -1;
+        const isDisabled = indexActiveAirline === -1;
 
         return (
           <div key={uid}
@@ -33,9 +32,7 @@ function FilterByAirline(props) {
             <label htmlFor={`airline-${uid}`} className={"control-bar__label"} >
               <span className={"control-bar__airline-name"}>{` - ${caption}`}</span>
               {isDisabled || <span className={"control-bar__min-price-footnote"}> {
-                selectedSegments.length === 0 ?
-                  `от ${minPrice} p.` :
-                  `от ${activeAirlines[indexActiveAirline].minPrice} p.`
+                `от ${activeAirlines[indexActiveAirline].minPrice} p.`
               }</span>}
             </label>
           </div>
@@ -51,7 +48,6 @@ FilterByAirline.propTypes = {
 const mapStateToProps = (state) => ({
   initialFilter: state.DATA.initialFilters.airlines,
   activeAirlines: state.DATA.activeAirlines,
-  selectedSegments: state.APP_STATE.selectedSegments,
   selectedAirlines: state.APP_STATE.selectedAirlines,
 
 });

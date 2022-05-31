@@ -5,36 +5,43 @@ import {
   fetchActiveFiltersBySegments,
   fetchActivePrice,
   fetchFilteredFlights,
+  fetchInitialFilters,
   fetchIsShowMore,
 } from '../store/api-actions'
 import FilterBySegments from "./FilterBySegments";
 import FilterByPrice from "./FilterByPrice";
 import FilterByAirline from "./FilterByAirline";
+import {COUNT_FLIGHTS_PER_STEP} from "../const";
 
 function Filters(props) {
   const {
+    activeSort,
+    flights,
     selectedSegments,
     selectedAirlines,
-    fetchFilteredFlights,
     selectedMinPrice,
     selectedMaxPrice,
     fetchActiveFiltersByAirlines,
     fetchActiveFiltersBySegments,
-    activeSort,
-    flights
+    fetchFilteredFlights,
+    fetchInitialFilters
   } = props
+
+  useEffect(() => {
+    fetchInitialFilters()
+  }, []);
 
   useEffect(() => {
     fetchFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort, flights});
   }, [selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort]);
 
   useEffect(() => {
-    fetchActiveFiltersByAirlines(selectedSegments);
-  }, [selectedSegments]);
+    fetchActiveFiltersByAirlines({selectedSegments, selectedMinPrice, selectedMaxPrice});
+  }, [selectedSegments, selectedMinPrice, selectedMaxPrice]);
 
   useEffect(() => {
-    fetchActiveFiltersBySegments(selectedAirlines);
-  }, [selectedAirlines]);
+    fetchActiveFiltersBySegments({selectedAirlines, selectedMinPrice, selectedMaxPrice});
+  }, [selectedAirlines, selectedMinPrice, selectedMaxPrice]);
 
 
   return (
@@ -60,18 +67,21 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort, flights}){
-    dispatch(fetchFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}))
-    dispatch(fetchIsShowMore(flights.length));
+  fetchFilteredFlights(params){
+    const {flights} = params;
+    const paging = {currentCount: flights.length, limit: COUNT_FLIGHTS_PER_STEP}
+    dispatch(fetchFilteredFlights(params))
+    dispatch(fetchIsShowMore(paging))
     dispatch(fetchActivePrice())
-
   },
-  fetchActiveFiltersByAirlines(selectedSegments){
-    dispatch(fetchActiveFiltersByAirlines(selectedSegments))
+  fetchActiveFiltersByAirlines(params){
+    dispatch(fetchActiveFiltersByAirlines(params))
   },
-
-  fetchActiveFiltersBySegments(selectedAirlines){
-    dispatch(fetchActiveFiltersBySegments(selectedAirlines))
+  fetchActiveFiltersBySegments(params){
+    dispatch(fetchActiveFiltersBySegments(params))
+  },
+  fetchInitialFilters(){
+    dispatch(fetchInitialFilters())
   },
 });
 

@@ -63,9 +63,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchNextFlights(currentAmount){
-    dispatch(fetchNextFlights(currentAmount))
-    dispatch(fetchIsShowMore(currentAmount + COUNT_FLIGHTS_PER_STEP));
+  fetchNextFlights(currentCount){
+    const paging = {currentCount, limit: COUNT_FLIGHTS_PER_STEP}
+    dispatch(fetchNextFlights(paging))
+    dispatch(fetchIsShowMore(paging));
   }
 });
 

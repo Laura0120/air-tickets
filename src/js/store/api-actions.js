@@ -9,13 +9,13 @@ import {
     getIsShowMore
 } from '../api/api'
 
-export const fetchIsShowMore = (renderedFlightsCount) => async (dispatch, _getState) => {
-    const inShowMore = await getIsShowMore(renderedFlightsCount);
+export const fetchIsShowMore = (paging) => async (dispatch, _getState) => {
+    const inShowMore = await getIsShowMore(paging);
     dispatch(ActionCreator.loadIsShowMore(inShowMore));
 }
 
-export const fetchNextFlights = (currentAmount) => async (dispatch, _getState) => {
-    const flights = await getNextFlights(currentAmount);
+export const fetchNextFlights = (paging) => async (dispatch, _getState) => {
+    const flights = await getNextFlights(paging);
     dispatch(ActionCreator.loadNextFlights(flights));
 }
 
@@ -24,18 +24,18 @@ export const fetchInitialFilters = () => async (dispatch, _getState) => {
     dispatch(ActionCreator.loadInitialFilters(initialFilters));
 }
 
-export const fetchFilteredFlights = ({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}) => async (dispatch, _getState) => {
-    const flights = await getFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort});
+export const fetchFilteredFlights = (params) => async (dispatch, _getState) => {
+    const flights = await getFilteredFlights(params);
     dispatch(ActionCreator.loadFilteredFlights(flights));
 }
 
-export const fetchActiveFiltersBySegments = (selectedAirlines) => async (dispatch, _getState) => {
-    const activeSegments= await getActiveFiltersBySegments(selectedAirlines);
+export const fetchActiveFiltersBySegments = (params) => async (dispatch, _getState) => {
+    const activeSegments= await getActiveFiltersBySegments(params);
     dispatch(ActionCreator.loadActiveSegments(activeSegments));
 }
 
-export const fetchActiveFiltersByAirlines = (selectedSegments) => async (dispatch, _getState) => {
-    const activeAirliners= await getActiveFiltersByAirlines(selectedSegments);
+export const fetchActiveFiltersByAirlines = (params) => async (dispatch, _getState) => {
+    const activeAirliners= await getActiveFiltersByAirlines(params);
     dispatch(ActionCreator.loadActiveAirliners(activeAirliners));
 }
 

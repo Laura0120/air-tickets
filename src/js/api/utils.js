@@ -21,38 +21,38 @@ export const sortFlight = (flights, activeSort) => {
 }
 
 export const filterFlights = ({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}) => {
-   const segmentsFilterExist = selectedSegments.length > 0;
-   const airlineFilterExist = selectedAirlines.length > 0;
+  const segmentsFilterExist = selectedSegments.length > 0;
+  const airlineFilterExist = selectedAirlines.length > 0;
   const minPriceFilterExist = selectedMinPrice !== "";
   const maxPriceFilterExist = selectedMaxPrice !== "";
 
-   const result = aLLFlights.filter(({flight}) => {
-     const flightAmount = Number(flight.price.passengerPrices[0].total.amount);
+  const result = aLLFlights.filter(({flight}) => {
+    const flightPriceAmount = Number(flight.price.passengerPrices[0].total.amount);
 
-     let isValidFlight = true;
+    let isValidFlight = true;
 
-     if (airlineFilterExist) {
-       isValidFlight = isValidFlight && selectedAirlines.includes(flight.carrier.uid);
-     }
+    if (airlineFilterExist) {
+      isValidFlight = isValidFlight && selectedAirlines.includes(flight.carrier.uid);
+    }
 
-     if (minPriceFilterExist) {
-       isValidFlight = isValidFlight && flightAmount >= selectedMinPrice;
-     }
+    if (minPriceFilterExist) {
+      isValidFlight = isValidFlight && flightPriceAmount >= selectedMinPrice;
+    }
 
-     if (maxPriceFilterExist) {
-       isValidFlight = isValidFlight && flightAmount <= selectedMaxPrice;
-     }
+    if (maxPriceFilterExist) {
+      isValidFlight = isValidFlight && flightPriceAmount <= selectedMaxPrice;
+    }
 
-     if (segmentsFilterExist) {
-       const maxSegments = getMaxCountSegmentsFlight(flight);
+    if (segmentsFilterExist) {
+      const maxSegments = getMaxCountSegmentsFlight(flight);
 
-       isValidFlight = isValidFlight && selectedSegments.includes(maxSegments);
-     }
+      isValidFlight = isValidFlight && selectedSegments.includes(maxSegments);
+    }
 
-     return isValidFlight;
-   });
+    return isValidFlight;
+  });
 
-   return sortFlight(result, activeSort);
+  return sortFlight(result, activeSort);
 
 }
 
@@ -79,35 +79,76 @@ export const collectInitialFilters = (flights) => {
   }, { segments: [], airlines: [] })
 }
 
-export const collectActiveFiltersByAirlines = (segments) => {
-  return aLLFlights.reduce((airlines, {flight}) => {
-    const currentSegments = getMaxCountSegmentsFlight(flight);
-    const currentAirline = {uid: flight.carrier.uid, minPrice: Number(flight.price.passengerPrices[0].total.amount) }
-    const storedAirlineIndex = airlines.findIndex(({uid}) => {
-      return uid === currentAirline.uid
-    })
-    const storedAirlineElement = airlines[storedAirlineIndex];
+export const collectActiveFiltersByAirlines = ({selectedSegments, selectedMinPrice, selectedMaxPrice}) => {
+  const segmentsFilterExist = selectedSegments.length > 0;
+  const minPriceFilterExist = selectedMinPrice !== "";
+  const maxPriceFilterExist = selectedMaxPrice !== "";
 
-    if (segments.includes(currentSegments) && storedAirlineIndex === -1) {
-      airlines.push(currentAirline)
-    } else if (storedAirlineIndex !== -1 && currentAirline.minPrice < storedAirlineElement.minPrice) {
-      storedAirlineElement.minPrice = currentAirline.minPrice
+  return aLLFlights.reduce((airlines, {flight}) => {
+    const flightSegments = getMaxCountSegmentsFlight(flight);
+    const currentAirline = flight.carrier.uid;
+    const flightPriceAmount = Number(flight.price.passengerPrices[0].total.amount);
+    const storedAirlineElement =  airlines[airlines.findIndex(({uid}) => uid === currentAirline)];
+
+    let isValidAirline = true;
+
+    if (segmentsFilterExist) {
+      isValidAirline = isValidAirline && selectedSegments.includes(flightSegments)
+    }
+
+    if (minPriceFilterExist && isValidAirline) {
+      isValidAirline = flightPriceAmount >= Number(selectedMinPrice);
+    }
+
+    if (maxPriceFilterExist && isValidAirline) {
+      isValidAirline = flightPriceAmount <= Number(selectedMaxPrice);
+    }
+
+    if (isValidAirline) {
+     !storedAirlineElement && airlines.push({uid: currentAirline, minPrice: flightPriceAmount})
+
+     if (storedAirlineElement && flightPriceAmount < storedAirlineElement.minPrice) {
+       storedAirlineElement.minPrice = flightPriceAmount
+     }
     }
 
     return airlines;
   }, [])
 }
 
-export const collectActiveFiltersBySegments = (airlines) => {
-  return  aLLFlights.reduce((segments, {flight}) => {
-    const currentSegments = getMaxCountSegmentsFlight(flight);
-    const currentAirline = flight.carrier.uid;
-    if (airlines.includes(currentAirline) && !segments.includes(currentSegments)) {
-      segments.push(currentSegments)
+export const collectActiveFiltersBySegments = ({selectedAirlines, selectedMinPrice, selectedMaxPrice}) => {
+  const airlineFilterExist = selectedAirlines.length > 0;
+  const minPriceFilterExist = selectedMinPrice !== "";
+  const maxPriceFilterExist = selectedMaxPrice !== "";
+
+  return aLLFlights.reduce((segments, {flight}) => {
+    const flightSegments = getMaxCountSegmentsFlight(flight);
+    const flightAirline = flight.carrier.uid;
+    const flightPriceAmount = Number(flight.price.passengerPrices[0].total.amount);
+    const storedSegment =  segments.includes(flightSegments)
+
+    let isValidSegment = true;
+
+    if (airlineFilterExist) {
+      isValidSegment = isValidSegment && selectedAirlines.includes(flightAirline)
     }
+
+    if (minPriceFilterExist && isValidSegment) {
+      isValidSegment = flightPriceAmount >= Number(selectedMinPrice);
+    }
+
+    if (maxPriceFilterExist && isValidSegment) {
+      isValidSegment = flightPriceAmount <= Number(selectedMaxPrice);
+    }
+
+    if (isValidSegment) {
+     !storedSegment && segments.push(flightSegments)
+    }
+
     return segments;
   }, [])
 }
+
 
 export const collectActivePrice = (flights) => {
   const sortedFlightsByPrice = [...flights].sort(ascendingPriceSort);
