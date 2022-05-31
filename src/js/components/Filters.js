@@ -10,7 +10,6 @@ import {
 import FilterBySegments from "./FilterBySegments";
 import FilterByPrice from "./FilterByPrice";
 import FilterByAirline from "./FilterByAirline";
-import {COUNT_FLIGHTS_PER_STEP} from "../const";
 
 function Filters(props) {
   const {
@@ -20,11 +19,13 @@ function Filters(props) {
     selectedMinPrice,
     selectedMaxPrice,
     fetchActiveFiltersByAirlines,
-    fetchActiveFiltersBySegments, activeSort
+    fetchActiveFiltersBySegments,
+    activeSort,
+    flights
   } = props
 
   useEffect(() => {
-    fetchFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort});
+    fetchFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort, flights});
   }, [selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort]);
 
   useEffect(() => {
@@ -54,13 +55,14 @@ const mapStateToProps = (state) => ({
     selectedAirlines: state.APP_STATE.selectedAirlines,
     selectedMinPrice: state.APP_STATE.selectedMinPrice,
     selectedMaxPrice: state.APP_STATE.selectedMaxPrice,
+    flights: state.DATA.flights,
     activeSort: state.APP_STATE.activeSort
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}){
+  fetchFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort, flights}){
     dispatch(fetchFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}))
-    dispatch(fetchIsShowMore(COUNT_FLIGHTS_PER_STEP));
+    dispatch(fetchIsShowMore(flights.length));
     dispatch(fetchActivePrice())
 
   },

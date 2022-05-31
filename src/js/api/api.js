@@ -16,7 +16,7 @@ export const getNextFlights = (currentAmount) => {
 }
 
 export const getIsShowMore = (renderedFlightsCount) => {
-  return Promise.resolve(validFlights.length >=  renderedFlightsCount);
+  return Promise.resolve(validFlights.length >  renderedFlightsCount);
 }
 
 export const getInitialFilters = () => {

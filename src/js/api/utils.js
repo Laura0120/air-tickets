@@ -23,7 +23,7 @@ export const sortFlight = (flights, activeSort) => {
 export const filterFlights = ({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}) => {
    const segmentsFilterExist = selectedSegments.length > 0;
    const airlineFilterExist = selectedAirlines.length > 0;
-  const minPriceFilterExist = selectedMaxPrice !== "";
+  const minPriceFilterExist = selectedMinPrice !== "";
   const maxPriceFilterExist = selectedMaxPrice !== "";
 
    const result = aLLFlights.filter(({flight}) => {
