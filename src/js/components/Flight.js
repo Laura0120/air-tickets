@@ -1,7 +1,4 @@
 import React from "react";
-import {connect} from "react-redux";
-import {ActionCreator} from '../store/action'
-import {fetchSortedFlights} from '../store/api-actions';
 import {baseUrl} from "../const";
 import {adaptFilterLabelBySegments, getHoursAndMinutes} from "../utils";
 
@@ -13,6 +10,7 @@ const localeOptions = {
   hour: "2-digit",
   minute: "2-digit",
 }
+
 function Flight(props) {
   const {leg} = props
   const {duration, segments} = leg
@@ -66,17 +64,4 @@ function Flight(props) {
 Flight.propTypes = {
 };
 
-const mapStateToProps = (state) => ({
-    activeSort: state.APP_STATE.activeSort,
-});
-
-const mapDispatchToProps = (dispatch, state) => ({
-    onChangeSorting(evt) {
-      dispatch(ActionCreator.changeSorting(evt.currentTarget.value));
-      dispatch(fetchSortedFlights(evt.currentTarget.value));
-    },
-
-});
-
-export {Flight};
-export default connect(mapStateToProps, mapDispatchToProps)(Flight);
+export default Flight;

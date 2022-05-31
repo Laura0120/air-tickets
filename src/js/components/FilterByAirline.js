@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {ActionCreator} from '../store/action'
-import {fetchActiveFiltersBySegments} from '../store/api-actions'
 
 function FilterByAirline(props) {
   const {initialFilter,
@@ -9,12 +8,7 @@ function FilterByAirline(props) {
     selectedSegments,
     selectedAirlines,
     onChangeAirline,
-    fetchActiveFiltersBySegments,
   } = props
-
-  useEffect(() => {
-    fetchActiveFiltersBySegments(selectedAirlines);
-  }, [selectedAirlines]);
 
   return (
     <fieldset className={"control-bar__filter"}>
@@ -68,9 +62,6 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(ActionCreator.removeAirlineFromFilter(evt.target.value)):
       dispatch(ActionCreator.addAirlineToFilter(evt.target.value));
     },
-  fetchActiveFiltersBySegments(selectedAirlines){
-    dispatch(fetchActiveFiltersBySegments(selectedAirlines))
-  },
 });
 
 export {FilterByAirline};

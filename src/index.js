@@ -8,8 +8,7 @@ import './scss/style.scss';
 import App from './js/components/App';
 import reportWebVitals from './reportWebVitals';
 import rootReducer from './js/store/reducers/root-reducer';
-import {fetchSortedFlights, fetchInitialFilters, fetchActivePrice, fetchIsShowMore} from './js/store/api-actions';
-import {SORT_TYPE, COUNT_FLIGHTS_PER_STEP} from './js/const'
+import {fetchInitialFilters} from './js/store/api-actions';
 
 const store = createStore(
     rootReducer,
@@ -24,9 +23,7 @@ root.render(
     </Provider>
 );
 
-store.dispatch(fetchSortedFlights(SORT_TYPE.ASCENDING_PRICE.value));
-store.dispatch(fetchIsShowMore(COUNT_FLIGHTS_PER_STEP));
 store.dispatch(fetchInitialFilters())
-store.dispatch(fetchActivePrice())
+
 
 reportWebVitals();

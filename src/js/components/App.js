@@ -6,7 +6,6 @@ import {fetchIsShowMore, fetchNextFlights} from "../store/api-actions";
 import {connect} from "react-redux";
 import {COUNT_FLIGHTS_PER_STEP} from "../const";
 
-
 function App(props) {
   const {flights, fetchNextFlights, isShowMore} = props
   const ticketsRef = document.querySelector(".tickets");

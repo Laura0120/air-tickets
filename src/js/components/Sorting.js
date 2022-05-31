@@ -1,8 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
-import {COUNT_FLIGHTS_PER_STEP, SORT_TYPE} from '../const';
+import {SORT_TYPE} from '../const';
 import {ActionCreator} from '../store/action'
-import {fetchIsShowMore, fetchSortedFlights} from '../store/api-actions';
 
 function Sorting(props) {
   const {activeSort, onChangeSorting} = props
@@ -36,11 +35,9 @@ const mapStateToProps = (state) => ({
     activeSort: state.APP_STATE.activeSort,
 });
 
-const mapDispatchToProps = (dispatch, state) => ({
+const mapDispatchToProps = (dispatch) => ({
     onChangeSorting(evt) {
       dispatch(ActionCreator.changeSorting(evt.currentTarget.value));
-      dispatch(fetchSortedFlights(evt.currentTarget.value));
-      dispatch(fetchIsShowMore(COUNT_FLIGHTS_PER_STEP));
     },
 
 });

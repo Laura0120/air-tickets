@@ -23,7 +23,7 @@ function FilterByPrice(props) {
                name={`price-min`}
                id={`price-min`}
                step={1000}
-               placeholder={Number(activeMinPrice)}
+               placeholder={activeMinPrice}
                value={selectedMinPrice}
                onChange={onChangeMinPrice}
                className={"control-bar__input-price"}
@@ -37,7 +37,7 @@ function FilterByPrice(props) {
                name={`price-max`}
                id={`price-max`}
                step={1000}
-               placeholder={Number(activeMaxPrice)}
+               placeholder={activeMaxPrice}
                value={selectedMaxPrice}
                onChange={onChangeMaxPrice}
                className={"control-bar__input-price"}

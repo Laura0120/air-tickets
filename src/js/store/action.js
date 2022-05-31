@@ -1,5 +1,4 @@
 const ActionType = {
-  LOAD_SORTED_FLIGHTS: `LOAD_SORTED_FLIGHTS`,
   LOAD_FILTERED_FLIGHTS: 'LOAD_FILTERED_FLIGHTS',
   LOAD_NEXT_FLIGHTS: `LOAD_NEXT_FLIGHTS`,
   LOAD_INITIAL_FILTERS: `LOAD_INITIAL_FILTERS`,
@@ -18,10 +17,6 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  loadSortedFlights: (flights) => ({
-    type: ActionType.LOAD_SORTED_FLIGHTS,
-    payload: flights,
-  }),
   loadFilteredFlights: (flights) => ({
     type: ActionType.LOAD_FILTERED_FLIGHTS,
     payload: flights,

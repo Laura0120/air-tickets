@@ -10,18 +10,15 @@ function FilterBySegments(props) {
     selectedSegments,
     selectedAirlines,
     onChangeSegments,
-    fetchActiveFiltersByAirlines,
+    selectedMinPrice,
+    selectedMaxPrice,
   } = props
-
-  useEffect(() => {
-    fetchActiveFiltersByAirlines(selectedSegments);
-  }, [selectedSegments]);
 
   return (
     <fieldset className={"control-bar__filter"}>
       <legend className={"visually-hidden"}>Количество пересадок</legend>
       {initialFilter.map((item) => {
-         const isDisabled = selectedAirlines.length !== 0 && !activeSegments.includes(item)
+         const isDisabled = (selectedAirlines.length > 0 || selectedMinPrice || selectedMaxPrice)  && !activeSegments.includes(item)
          return (
             <div key={item}
                  className={"control-bar__input-wrapper"}
@@ -62,9 +59,6 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(ActionCreator.removeSegmentFromFilter(Number(evt.currentTarget.value))):
       dispatch(ActionCreator.addSegmentToFilter(Number(evt.currentTarget.value)));
     },
-  fetchActiveFiltersByAirlines(selectedSegments){
-    dispatch(fetchActiveFiltersByAirlines(selectedSegments))
-  },
 });
 
 export {FilterBySegments};

@@ -1,6 +1,5 @@
 import {ActionCreator} from "./action";
 import {
-    getSortedFlights,
     getInitialFilters,
     getFilteredFlights,
     getActiveFiltersByAirlines,
@@ -9,11 +8,6 @@ import {
     getNextFlights,
     getIsShowMore
 } from '../api/api'
-
-export const fetchSortedFlights = (activeSort) => async (dispatch, _getState) => {
-    const flights = await getSortedFlights(activeSort);
-    dispatch(ActionCreator.loadSortedFlights(flights));
-}
 
 export const fetchIsShowMore = (renderedFlightsCount) => async (dispatch, _getState) => {
     const inShowMore = await getIsShowMore(renderedFlightsCount);
@@ -30,8 +24,8 @@ export const fetchInitialFilters = () => async (dispatch, _getState) => {
     dispatch(ActionCreator.loadInitialFilters(initialFilters));
 }
 
-export const fetchFilteredFlights = ({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice}) => async (dispatch, _getState) => {
-    const flights = await getFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice});
+export const fetchFilteredFlights = ({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}) => async (dispatch, _getState) => {
+    const flights = await getFilteredFlights({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort});
     dispatch(ActionCreator.loadFilteredFlights(flights));
 }
 
@@ -47,6 +41,6 @@ export const fetchActiveFiltersByAirlines = (selectedSegments) => async (dispatc
 
 export const fetchActivePrice = () => async (dispatch, _getState) => {
     const {minPrice, maxPrice} = await getActivePrice();
-    dispatch(ActionCreator.loadActiveMinPrice(minPrice));
-    dispatch(ActionCreator.loadActiveMaxPrice(maxPrice));
+    dispatch(ActionCreator.loadActiveMinPrice(Number(minPrice)));
+    dispatch(ActionCreator.loadActiveMaxPrice(Number(maxPrice)));
 }

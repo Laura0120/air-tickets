@@ -16,10 +16,6 @@ const initialState = {
 
 const loadedData = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_SORTED_FLIGHTS:
-      return extend(state, {
-        flights : action.payload,
-      });
     case ActionType.LOAD_FILTERED_FLIGHTS:
       return extend(state, {
         flights : action.payload,

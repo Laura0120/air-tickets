@@ -4,8 +4,8 @@ import {SORT_TYPE} from "../const";
 
 export const aLLFlights  = [...initialData.result.flights];
 
-export const sortFlight = ({validFlights, activeSort}) => {
-  const sortedFlights = [...validFlights]
+export const sortFlight = (flights, activeSort) => {
+  const sortedFlights = [...flights]
   switch (activeSort) {
     case SORT_TYPE.ASCENDING_PRICE.value: {
       return sortedFlights.sort(ascendingPriceSort)
@@ -20,11 +20,11 @@ export const sortFlight = ({validFlights, activeSort}) => {
   }
 }
 
-export const filterFlights = ({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice}) => {
+export const filterFlights = ({selectedSegments, selectedAirlines, selectedMinPrice, selectedMaxPrice, activeSort}) => {
    const segmentsFilterExist = selectedSegments.length > 0;
-   const minPriceFilterExist = selectedMaxPrice !== "";
-   const maxPriceFilterExist = selectedMaxPrice !== "";
    const airlineFilterExist = selectedAirlines.length > 0;
+  const minPriceFilterExist = selectedMaxPrice !== "";
+  const maxPriceFilterExist = selectedMaxPrice !== "";
 
    const result = aLLFlights.filter(({flight}) => {
      const flightAmount = Number(flight.price.passengerPrices[0].total.amount);
@@ -52,7 +52,7 @@ export const filterFlights = ({selectedSegments, selectedAirlines, selectedMinPr
      return isValidFlight;
    });
 
-   return result;
+   return sortFlight(result, activeSort);
 
 }
 

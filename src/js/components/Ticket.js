@@ -1,8 +1,5 @@
 import React from "react";
-import {connect} from "react-redux";
 import {baseUrl} from '../const'
-import {ActionCreator} from '../store/action'
-import {fetchSortedFlights} from '../store/api-actions';
 import Flight from './Flight';
 
 function Ticket(props) {
@@ -36,17 +33,4 @@ function Ticket(props) {
 Ticket.propTypes = {
 };
 
-const mapStateToProps = (state) => ({
-    activeSort: state.APP_STATE.activeSort,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-    onChangeSorting(evt) {
-      dispatch(ActionCreator.changeSorting(evt.currentTarget.value));
-      dispatch(fetchSortedFlights(evt.currentTarget.value));
-    },
-
-});
-
-export {Ticket};
-export default connect(mapStateToProps, mapDispatchToProps)(Ticket);
+export default  Ticket;
