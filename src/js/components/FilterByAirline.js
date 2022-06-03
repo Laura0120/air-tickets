@@ -12,9 +12,9 @@ function FilterByAirline(props) {
   return (
     <fieldset className={"control-bar__filter"}>
       <legend className={"control-bar__title"}>Авиокомпании</legend>
-      {initialFilter.map(({uid, caption, minPrice}) => {
-        const indexActiveAirline = activeAirlines.findIndex((item) => item.uid === uid)
-        const isDisabled = indexActiveAirline === -1;
+      {initialFilter.map(({uid, caption}) => {
+        const activeAirline = activeAirlines.find((item) => item.uid === uid)
+        const isDisabled = !activeAirline;
 
         return (
           <div key={uid}
@@ -32,7 +32,7 @@ function FilterByAirline(props) {
             <label htmlFor={`airline-${uid}`} className={"control-bar__label"} >
               <span className={"control-bar__airline-name"}>{` - ${caption}`}</span>
               {isDisabled || <span className={"control-bar__min-price-footnote"}> {
-                `от ${activeAirlines[indexActiveAirline].minPrice} p.`
+                `от ${activeAirline.minPrice} p.`
               }</span>}
             </label>
           </div>

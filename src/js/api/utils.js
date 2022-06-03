@@ -60,19 +60,16 @@ export const collectInitialFilters = (flights) => {
  return  flights.reduce(({segments, airlines}, {flight}) => {
     const currentSegments = getMaxCountSegmentsFlight(flight)
     const currentAirline = {caption: flight.carrier.caption, uid: flight.carrier.uid, minPrice: Number(flight.price.passengerPrices[0].total.amount) }
-    const storedAirlineIndex = airlines.findIndex(({uid}) => {
-      return uid === currentAirline.uid
-    })
-   const storedAirlineElement = airlines[storedAirlineIndex];
+    const storedAirline = airlines.find(({uid}) => uid === currentAirline.uid);
 
     if (!segments.includes(currentSegments)) {
       segments.push(currentSegments)
     }
 
-    if (storedAirlineIndex === -1) {
+    if (!storedAirline) {
       airlines.push(currentAirline)
-    } else if (currentAirline.minPrice < storedAirlineElement.minPrice) {
-      storedAirlineElement.minPrice = currentAirline.minPrice
+    } else if (currentAirline.minPrice < storedAirline.minPrice) {
+      storedAirline.minPrice = currentAirline.minPrice
     }
 
     return {segments, airlines};
@@ -84,11 +81,11 @@ export const collectActiveFiltersByAirlines = ({selectedSegments, selectedMinPri
   const minPriceFilterExist = selectedMinPrice !== "";
   const maxPriceFilterExist = selectedMaxPrice !== "";
 
-  return aLLFlights.reduce((airlines, {flight}) => {
+    return aLLFlights.reduce((airlines, {flight}) => {
     const flightSegments = getMaxCountSegmentsFlight(flight);
     const currentAirline = flight.carrier.uid;
     const flightPriceAmount = Number(flight.price.passengerPrices[0].total.amount);
-    const storedAirlineElement =  airlines[airlines.findIndex(({uid}) => uid === currentAirline)];
+    const storedAirline =  airlines.find(({uid}) => uid === currentAirline);
 
     let isValidAirline = true;
 
@@ -105,10 +102,10 @@ export const collectActiveFiltersByAirlines = ({selectedSegments, selectedMinPri
     }
 
     if (isValidAirline) {
-     !storedAirlineElement && airlines.push({uid: currentAirline, minPrice: flightPriceAmount})
+     !storedAirline && airlines.push({uid: currentAirline, minPrice: flightPriceAmount})
 
-     if (storedAirlineElement && flightPriceAmount < storedAirlineElement.minPrice) {
-       storedAirlineElement.minPrice = flightPriceAmount
+     if (storedAirline && flightPriceAmount < storedAirline.minPrice) {
+       storedAirline.minPrice = flightPriceAmount
      }
     }
 
